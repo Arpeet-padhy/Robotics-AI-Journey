@@ -4,6 +4,7 @@ A structured 12-month self-study roadmap toward publishing original robotics res
 
 **Goal:** Publish at ICRA/IROS → Work at NVIDIA → Found a RaaS startup
 
+📓 [View my daily dev log →](./DEVLOG.md)
 ---
 
 ## 🗺️ Roadmap Overview
@@ -101,7 +102,6 @@ A structured 12-month self-study roadmap toward publishing original robotics res
 - Define a Robotics-as-a-Service problem worth solving
 - Build an MVP prototype
 - Draft a pitch deck and business model
-📓 [View my daily dev log →](./DEVLOG.md)
 
 ---
 
