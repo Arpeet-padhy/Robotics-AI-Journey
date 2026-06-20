@@ -5,6 +5,31 @@ Newest entries at the top.
 
 ---
 
+## Day 2 — June 20, 2026
+**Phase:** 1 — Foundations Sprint
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched CS223A Lecture 1 (course overview) and Lecture 2 (spatial descriptions)
+- Implemented rotation matrices (Rz) in numpy
+- Built a full 4x4 homogeneous transformation matrix from scratch
+- Chained two transforms together simulating a 2-joint robot arm
+
+### 🧠 What I learned
+- Rotation matrix transforms a point between coordinate frames
+- Homogeneous transforms combine rotation + translation into one 4x4 matrix
+- Chaining transforms = how robot arms calculate end effector position
+- Transform order matters — T1 @ T2 ≠ T2 @ T1
+
+### 🚧 Blockers & how I fixed them
+- Accidentally closed Jupyter browser tab — relaunched with same command
+
+### 🔜 Next session
+- CS223A Lecture 3 (forward kinematics)
+- Implement Euler angles and quaternions in numpy
+
+---
+
 ## Day 1 — June 19, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~3 hrs
