@@ -5,6 +5,35 @@ Newest entries at the top.
 
 ---
 
+## Day 3 — June 21, 2026
+**Phase:** 1 — Foundations Sprint
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Set up Obsidian Welcome page and Resources note
+- Watched CS223A Lecture 3 (Forward Kinematics, Euler angles, Quaternions)
+- Implemented Z-Y-X Euler angle rotation matrices in numpy
+- Demonstrated gimbal lock singularity in code (cos(beta)=0)
+- Implemented quaternion conversion from rotation matrix
+- Proved quaternions handle singularities perfectly (magnitude=1.0 always)
+
+### 🧠 What I learned
+- Euler angles have 12 representations but all suffer from singularities
+- Gimbal lock occurs when cos(beta)=0 — Z and X axes align, lose one DOF
+- Quaternions use 4 parameters, always magnitude=1, never singular
+- ROS2, Isaac Sim, Unity all use quaternions internally — now I know why
+
+### 🚧 Blockers & how I fixed them
+- IndentationError in Jupyter — caused by mixing tabs and spaces while typing
+- SyntaxError: hyphen in variable name (pitch-singular) → fixed to pitch_singular
+
+### 🔜 Next session
+- CS223A Lecture 4 (Velocity kinematics, Jacobian)
+- Start DH parameters implementation
+- Begin forward kinematics for a 3-joint arm
+
+---
+
 ## Day 2 — June 20, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~2 hrs
