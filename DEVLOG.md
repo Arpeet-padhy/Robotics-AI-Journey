@@ -5,6 +5,34 @@ Newest entries at the top.
 
 ---
 
+## Day 4 — June 24, 2026
+**Phase:** 1 — Foundations Sprint
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched CS223A Lecture 4 (DH Parameters, Forward Kinematics)
+- Implemented DH transformation matrix from scratch in numpy
+- Built full 3-joint robot arm forward kinematics using DH parameters
+- Computed end effector position (x=0.720, y=1.626) from joint angles
+- Visualized the robot arm using matplotlib — base, joints, end effector plotted
+
+### 🧠 What I learned
+- DH notation describes any robot joint with just 4 parameters (a, α, d, θ)
+- For revolute joints θ is variable, for prismatic joints d is variable
+- End effector position = chaining all joint transforms T1 @ T2 @ T3
+- Translation (position) is always in column 3 of the 4x4 transform matrix
+- plt.axis('equal') is critical for geometrically correct robot arm plots
+
+### 🚧 Blockers & how I fixed them
+- None today — clean session
+
+### 🔜 Next session
+- CS223A Lecture 5 (Jacobian, Velocity Kinematics)
+- Implement Jacobian matrix for the 3-joint arm
+- Compute joint velocities from end effector velocities
+
+---
+
 ## Day 3 — June 21, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~2 hrs
