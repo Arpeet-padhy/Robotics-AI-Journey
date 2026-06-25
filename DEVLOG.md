@@ -5,6 +5,33 @@ Newest entries at the top.
 
 ---
 
+## Day 6 — June 25, 2026
+**Phase:** 1 — Foundations Sprint
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched CS223A Lecture 6 (Jacobian + Velocity Kinematics)
+- Built 2x3 Jacobian matrix for 3-joint planar arm from scratch
+- Used pseudoinverse (pinv) to compute joint velocities from desired end effector velocity
+- Verified result — J @ q_dot matched desired velocity exactly
+- Visualized arm with velocity arrow showing desired end effector direction
+
+### 🧠 What I learned
+- Jacobian maps joint velocities to end effector velocities: ẋ = J(q)q̇
+- Pseudoinverse handles non-square matrices — picks minimum norm solution
+- 3-joint arm in 2D is redundant — infinite joint solutions for one end effector velocity
+- Inverse Jacobian is how real robot controllers work — runs thousands of times per second
+- plt.arrow() draws velocity vectors on matplotlib plots
+
+### 🚧 Blockers & how I fixed them
+- None today — clean session
+
+### 🔜 Next session
+- Mini project — complete robot arm simulator
+- Combines everything from Days 2-6 into one clean notebook
+
+---
+
 ## Day 5 — June 24, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~2 hrs
