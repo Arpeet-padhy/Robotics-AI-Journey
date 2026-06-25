@@ -5,6 +5,34 @@ Newest entries at the top.
 
 ---
 
+## Day 5 — June 24, 2026
+**Phase:** 1 — Foundations Sprint
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched CS223A Lecture 5 (Stanford Arm, Forward Kinematics)
+- Implemented full 6DOF Stanford Arm using DH parameters
+- Used prismatic joint (d3) for linear extension
+- Chained all 6 transforms to get end effector pose
+- Visualized Stanford Arm in 3D using matplotlib
+
+### 🧠 What I learned
+- Stanford Arm has prismatic joint 3 (d variable) + spherical wrist (joints 4,5,6)
+- Spherical wrist joints share same origin point — simplifies position calculation
+- Wrist lock singularity: when theta5=0, joints 4 and 6 align, lose 1 DOF
+- enumerate() in Python gives both index and value in a loop
+- f-strings embed variables directly inside print statements
+
+### 🚧 Blockers & how I fixed them
+- Jupyter kernel got stuck (In[*]) → fixed with Kernel → Restart & Run All
+
+### 🔜 Next session
+- CS223A Lecture 6 (Jacobian Matrix)
+- Implement Jacobian for velocity kinematics
+- Compute joint velocities from end effector velocities
+
+---
+
 ## Day 4 — June 24, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~2 hrs
