@@ -5,6 +5,34 @@ Newest entries at the top.
 
 ---
 
+## Day 7 — June 28, 2026
+**Phase:** 1 — Foundations Sprint ← COMPLETED ✅
+**Time spent:** ~3 hrs
+
+### ✅ What I did
+- Built complete Phase 1 Mini Project — Robot Arm Simulator
+- Combined all Phase 1 concepts into one clean simulator function
+- Rotation matrices, quaternions, DH parameters, forward kinematics, Jacobian
+- Dual visualization — arm plot + joint velocity bar chart
+- Pushed final mini project to GitHub
+
+### 🧠 What I learned
+- R = T_final[:3, :3] extracts rotation, NOT T_final[:3, 3] (that's translation)
+- Trace of rotation matrix = R[0,0] + R[1,1] + R[2,2] — used for quaternion conversion
+- All Phase 1 concepts chain together naturally into one simulator
+- Clean function design makes code reusable and readable
+
+### 🚧 Blockers & how I fixed them
+- IndexError in quaternion function — R was 1D (column) not 3x3 matrix
+  Fixed: T_final[:3, 3] → T_final[:3, :3]
+
+### 🔜 Next session
+- Phase 2 begins — AI & Perception
+- Computer Vision fundamentals (OpenCV)
+- Deep learning intro (PyTorch CNNs)
+
+---
+
 ## Day 6 — June 25, 2026
 **Phase:** 1 — Foundations Sprint
 **Time spent:** ~2 hrs
