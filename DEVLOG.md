@@ -5,6 +5,36 @@ Newest entries at the top.
 
 ---
 
+## Day 8 — June 28, 2026
+**Phase:** 2 — AI & Perception
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched First Principles of CV — Image Formation playlist (6 videos)
+- Started Phase 2 OpenCV notebook
+- Learned images are just numpy arrays (height x width x 3)
+- Created images from scratch using np.zeros()
+- Fixed BGR vs RGB issue using cv2.cvtColor()
+- Saved and reloaded images with cv2.imwrite() and cv2.imread()
+- Core operations — grayscale, resize, crop
+
+### 🧠 What I learned
+- Images are numpy arrays of dtype uint8 (values 0-255)
+- OpenCV uses BGR, matplotlib uses RGB — always convert before display
+- Grayscale removes the channel dimension (300,300,3) → (300,300)
+- Cropping is just numpy slicing — img[y1:y2, x1:x2]
+- Pinhole camera model maps 3D world to 2D image plane
+
+### 🚧 Blockers & how I fixed them
+- BGR vs RGB confusion — fixed with cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+### 🔜 Next session
+- Image Sensing playlist (First Principles of CV)
+- Pixel intensity, histograms, thresholding
+- Edge detection basics
+
+---
+
 ## Day 7 — June 28, 2026
 **Phase:** 1 — Foundations Sprint ← COMPLETED ✅
 **Time spent:** ~3 hrs
