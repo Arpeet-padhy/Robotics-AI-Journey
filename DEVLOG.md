@@ -5,6 +5,35 @@ Newest entries at the top.
 
 ---
 
+## Day 9 — June 30, 2026
+**Phase:** 2 — AI & Perception
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched First Principles of CV — Image Sensing playlist
+- Built pixel intensity histograms using cv2.calcHist()
+- Analyzed histogram peaks matching test image colors
+- Implemented thresholding for binary image segmentation
+- Compared threshold=100 vs threshold=50 effects
+
+### 🧠 What I learned
+- Histograms show distribution of pixel brightness (0-255)
+- Histogram peaks correspond to dominant colors/regions in image
+- Thresholding: pixel > threshold → white(255), else → black(0)
+- Lower threshold = more pixels pass = more white in output
+- cv2.threshold() returns (ret_value, result_image) — use _ to discard unused value
+- CCD/CMOS sensors, Bayer filters reconstruct color from monochromatic sensors
+
+### 🚧 Blockers & how I fixed them
+- None today — clean session
+
+### 🔜 Next session
+- Binary Images playlist (First Principles of CV)
+- Edge detection basics
+- Contour detection
+
+---
+
 ## Day 8 — June 28, 2026
 **Phase:** 2 — AI & Perception
 **Time spent:** ~2 hrs
