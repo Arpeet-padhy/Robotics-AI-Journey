@@ -5,6 +5,35 @@ Newest entries at the top.
 
 ---
 
+## Day 10 — July 2, 2026
+**Phase:** 2 — AI & Perception
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+- Watched Binary Images playlist (First Principles of CV)
+- Implemented contour detection using cv2.findContours()
+- Extracted geometric properties — area, perimeter, centroid, bounding box
+- Implemented morphological operations — erosion, dilation, opening, closing
+- Visualized all operations side by side
+
+### 🧠 What I learned
+- Contours are outlines of white regions in binary images
+- cv2.moments() gives centroid (center of mass) of a contour
+- Erosion shrinks white regions, dilation expands them
+- Opening = erosion→dilation (removes noise)
+- Closing = dilation→erosion (fills holes)
+- Kernel size controls how aggressive the morphological operation is
+
+### 🚧 Blockers & how I fixed them
+- NameError on eroded — code was split across cells incorrectly
+  Fixed by putting all morphological ops in one single cell
+
+### 🔜 Next session
+- Edge detection (Canny, Sobel)
+- Feature detection (Harris corners, SIFT)
+
+---
+
 ## Day 9 — June 30, 2026
 **Phase:** 2 — AI & Perception
 **Time spent:** ~2 hrs
