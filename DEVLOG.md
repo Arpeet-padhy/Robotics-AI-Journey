@@ -5,6 +5,41 @@ Newest entries at the top.
 
 ---
 
+## Day 11 — July 7, 2026
+
+**Phase:** 2 — AI & Perception 
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+
+- Watched First Principles of CV (Nayar) — Edge Detection & Corner Detection playlist (videos 1-6)
+- Implemented Sobel edge detection — separate Gx/Gy kernels, combined via gradient magnitude
+- Implemented Laplacian edge detection — second-order derivative, zero-crossing based
+- Implemented Canny edge detector — Gaussian blur → Sobel gradients → non-max suppression → hysteresis thresholding
+- Ran threshold sensitivity sweep on Canny (low/high pairs) on a synthetic 4-quadrant test image
+- Built side-by-side comparison: Sobel vs Laplacian vs Canny on the same image
+
+### 🧠 What I learned
+
+- Edge = significant local discontinuity in image intensity
+- Sobel = first-order derivative — Gx detects vertical edges, Gy detects horizontal edges, magnitude = sqrt(Gx²+Gy²)
+- Laplacian = second-order derivative — omnidirectional, but detects zero-crossings, which shows up visually as "doubled" edges (positive + negative lobes both turn positive after abs())
+- Canny isn't a separate algorithm from scratch — it's Sobel gradients + a decision pipeline (blur → gradient → thin → threshold-and-link)
+- Canny's hysteresis thresholds (low, high) act as a hard discard rule — real edges with low contrast can get deleted entirely if the threshold is set too high, even though Sobel/Laplacian still show them faintly
+- Corners are 2D interest points where 2+ edges meet — more distinctive than edges alone (setup for SIFT/feature detection next)
+
+### 🚧 Blockers & how I fixed them
+
+- Canny (low=50, high=150) completely dropped the edge around the darkest quadrant (near-black square against black background) — Sobel/Laplacian still caught it faintly since they don't threshold
+Fixed by lowering thresholds (low=20, high=60 and below) until the low-contrast edge reappeared — confirmed root cause was gradient magnitude at that boundary never clearing the low_threshold bar
+
+### 🔜 Next session
+
+- Day 12 — SIFT Detector & Feature Detection (videos 7-16): keypoints, descriptors, feature matching
+- Harris Corner Detection (watched but not yet coded — pending a dedicated cell/session)
+
+---
+
 ## Day 10 — July 2, 2026
 **Phase:** 2 — AI & Perception
 **Time spent:** ~2 hrs
