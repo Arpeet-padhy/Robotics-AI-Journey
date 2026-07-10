@@ -5,6 +5,47 @@ Newest entries at the top.
 
 ---
 
+## Day 12 — July 11, 2026
+
+**Phase:** 2 — AI & Perception 
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+
+- Watched First Principles of CV (Nayar) — Boundary Detection playlist (videos 7-11): line/curve fitting, active contours, Hough Transform, generalized Hough
+- Built `day12-hough-transform.ipynb`
+- Coded Harris Corner Detection (carried over from Day 11) — ran on 4-quadrant test image, correctly flagged the center 4-way intersection as strongest corner
+- Built synthetic test image (horizontal, vertical, diagonal lines + rectangle) with known ground-truth line count
+- Implemented Hough Transform pipeline — Canny → `cv2.HoughLinesP` — on synthetic image
+- Debugged a line-count mismatch (14-15 detected vs 7 drawn) by printing each detected line's actual (x,y) endpoints and angle instead of guessing from the count alone
+- Tested full pipeline on a real photo (own train track photo) — tree canopy texture caused massive over-detection (420 lines)
+- Iteratively fixed real-photo detection: tightened Canny/Hough thresholds (420→234), then added ROI masking — rectangular band failed (trees flank tracks at every row), trapezoid ROI matching rail perspective succeeded (234→91, all tree noise gone)
+
+### 🧠 What I learned
+
+- Harris Corner Detection: structure tensor M built from Ix/Iy gradients in a local window; eigenvalues of M distinguish flat regions (both small) vs edges (one large) vs corners (both large). R = det(M) - k·trace(M)² is the cheap proxy for eigenvalue analysis
+- Hough Transform shifts the problem from image space to parameter space — every edge pixel votes for every line (ρ,θ) that could pass through it; peaks in the accumulator = detected lines
+- Polar form ρ = x·cos(θ) + y·sin(θ) avoids the vertical-line singularity of y = mx + c
+- threshold / minLineLength / maxLineGap in HoughLinesP is the same sensitivity tradeoff pattern as Canny's hysteresis and Harris's response threshold — recurring tension across all of classical CV
+- Any drawn line has two physical edges (rising + falling gradient) — Canny always double-detects a single drawn line into a parallel pair, independent of line thickness
+- Real image noise (tree texture) can't always be fixed by parameter tuning — sometimes the fix is spatial (Region of Interest masking), not sensitivity-based
+- ROI shape has to match scene geometry — a flat rectangular cutoff failed since trees flank the track at every row, not just above one line; a trapezoid matching the rails' converging perspective worked
+
+### 🚧 Blockers & how I fixed them
+
+- Real photo (train tracks) initially returned 420 Hough lines — almost entirely tree canopy texture, not real structure
+Fixed partially by tightening Canny (50,150→100,200) and Hough params (threshold 80→150, minLineLength 60→100, maxLineGap 80→15), which cut it to 234
+- 234 was still dominated by the treeline silhouette (jagged-but-diagonal edge got over-detected as many near-duplicate lines) — rectangular ROI band (top 40% cutoff) didn't fix it since trees run alongside the tracks at every height, not just above a line
+Fixed by switching to a trapezoid ROI matching the rails' actual perspective (wide at bottom, narrow at vanishing point) — cut to 91, zero tree contamination
+- Remaining unsolved: 91 detections vs ~2-4 real lines inside the correct ROI — gravel/tie texture is legitimate texture inside a legitimate region, so masking can't remove it. Left open for later (Gaussian blur pre-Canny or morphological cleanup are candidate fixes)
+
+### 🔜 Next session
+
+- Day 13 — SIFT Detector (videos 12-16): interest points, blob detection, scale-invariant keypoints, descriptors
+- Revisit gravel-texture-inside-ROI problem if time allows — ties into SIFT's scale-space idea (separating texture-scale from structure-scale features)
+
+---
+
 ## Day 11 — July 7, 2026
 
 **Phase:** 2 — AI & Perception 
