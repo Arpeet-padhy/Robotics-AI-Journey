@@ -5,6 +5,46 @@ Newest entries at the top.
 
 ---
 
+## Day 13 — July 17, 2026
+
+**Phase:** 2 — AI & Perception 
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+
+- Watched First Principles of CV (Nayar) — SIFT Detector playlist (videos 12-16): interest points, blob detection, SIFT detector, SIFT descriptor
+- Built `day13-sift-detector.ipynb`
+- Built synthetic scale-space by hand (Gaussian blur at σ = 1,2,4,8,16) on a test image with 4 blobs of different sizes — visually confirmed small blobs dissolve faster than large ones under blur
+- Computed Difference of Gaussians (DoG) between adjacent scale-space layers — visually confirmed each blob's peak response shifts from early DoG layers (small blob) to later layers (large blob)
+- Ran `cv2.SIFT_create()` on the synthetic blob image, verified keypoint `size` scales correctly with actual blob radius (15→19.3, 30→38.3, 45→57.0, 60→72.3)
+- Investigated why each blob produced 4-8 near-duplicate keypoints — traced to orientation histogram having multiple comparable peaks on radially symmetric shapes
+- Filtered low-confidence keypoints (rasterization artifacts from `cv2.circle`) using `kp.response` threshold
+- Tested SIFT on a real photo (Day 12's train track image) — generated a rotated (35°) + scaled (0.7x) version, ran keypoint matching with BFMatcher + Lowe's ratio test (0.75)
+- Got 1030 good matches out of 3146 keypoints — mostly coherent, but visible crisscrossing especially in gravel/tree-canopy regions
+
+### 🧠 What I learned
+
+- Scale-space = same image blurred at increasing σ; no single blur level is correct for every blob size — small blobs dissolve early, large blobs dissolve late
+- DoG (Difference of Gaussians) = subtracting adjacent blur layers, a cheap approximation of Laplacian-of-Gaussian blob detection — each blob peaks in DoG at the layer matching its own size
+- SIFT keypoints carry position, size (scale), angle (orientation), and response (confidence) — size is literally the σ at which the DoG extremum was found
+- Orientation assignment (dominant gradient direction near a keypoint) is what makes SIFT rotation-invariant; radially symmetric shapes produce multiple near-equal orientation peaks → multiple keypoints at the same location
+- SIFT descriptor = 4×4 grid of 8-bin gradient histograms around a keypoint = 128 values, not a single number
+- Lowe's ratio test (best match must be clearly better than second-best, e.g. <0.75x) filters ambiguous matches — same threshold-tuning pattern as Canny/Harris/Hough
+- Ratio test alone isn't enough for repetitive texture (gravel, foliage) — locally ambiguous patches can still individually pass the ratio test while being globally wrong matches
+
+### 🚧 Blockers & how I fixed them
+
+- `from skimage import data` failed with ModuleNotFoundError — package not installed in local `robotics` conda env (was available in a different sandbox environment)
+Fixed by reusing Day 12's train track photo instead of adding a new dependency
+- 41 keypoints detected on a 4-blob synthetic image instead of ~4 — investigated via response values instead of assuming a bug; found real blob-center detections (response ≈0.16-0.17) clearly separable from low-confidence rasterization-edge artifacts (response ≈0.06) — confirmed synthetic circle edges aren't perfectly smooth at pixel level
+
+### 🔜 Next session
+
+- Add RANSAC + homography filtering to the real-photo matching pipeline — should collapse the crisscrossing false matches (repetitive gravel/tree texture) down to geometrically consistent true matches
+- Move toward Phase 3 planning (ROS2, hardware) or continue deepening Phase 2 feature-matching work — decide next session
+
+---
+
 ## Day 12 — July 11, 2026
 
 **Phase:** 2 — AI & Perception 
