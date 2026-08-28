@@ -5,6 +5,45 @@ Newest entries at the top.
 
 ---
 
+## Day 14 — August 28, 2026
+
+**Phase:** 2 — AI & Perception (Deep Learning mini-arc, Day 1 of 5)
+**Time spent:** ~2.5 hrs
+
+### ✅ What I did
+
+- Watched 3Blue1Brown Neural Networks series (videos 1-4): architecture, gradient descent, backpropagation intuition, backprop calculus
+- Watched CS231n Lecture 3 (Loss Functions and Optimization) and Lecture 4 (Neural Networks and Backpropagation)
+- Built `day14 nn fundamentals.ipynb` in new `phase2-ai-perception/deep-learning/` folder
+- Built a non-linearly-separable toy dataset (interleaving two-crescent "moons" shape)
+- Implemented a full 2-layer network from scratch in NumPy: forward pass (linear + ReLU + sigmoid), binary cross-entropy loss, backpropagation via manual chain rule, gradient descent training loop
+- Trained a 4-hidden-neuron network — plateaued hard at 85% accuracy
+- Diagnosed the plateau by visualizing the decision boundary + checking per-neuron activation stats — found 2 of 4 neurons permanently dead (0% activation, dying ReLU)
+- Fixed via two separate experiments to isolate cause: (1) increased hidden neurons 4→16 with plain ReLU → 99.5% accuracy; (2) kept 4 neurons but switched to Leaky ReLU → only 86% accuracy, despite zero dead neurons
+- Concluded capacity (hidden layer width) was the dominant constraint, not just dying ReLU — Leaky ReLU fixed neuron death but couldn't compensate for too few neurons overall
+
+### 🧠 What I learned
+
+- A network layer is linear transform (Wx+b) + nonlinear activation; without nonlinearity, stacking layers collapses into one linear function
+- For sigmoid output + binary cross-entropy loss, dL/dz simplifies exactly to (prediction - truth) — a real calculus result, not an approximation
+- Backprop is the chain rule applied recursively, layer by layer, reusing cached forward-pass values (z1, a1, z2, a2) — same idea as a computational graph
+- Dying ReLU: if a neuron's weighted input is negative for every sample, ReLU outputs 0, gradient is 0, and gradient descent can never revive it — permanent, not recoverable by more training
+- Each ReLU neuron contributes one "fold" (piecewise-linear segment) to a decision boundary; enough folds can approximate a smooth curve even though every individual piece is a straight line
+- Leaky ReLU prevents neuron death (small negative slope keeps gradient nonzero) but doesn't fix insufficient network capacity — these are two distinct failure modes that can co-occur
+- Weight initialization scale directly explains why untrained predictions cluster near 0.5 rather than being "randomly" spread 0-1
+
+### 🚧 Blockers & how I fixed them
+
+- 4-neuron network plateaued at 85% accuracy for 2500+ epochs with no improvement — investigated via decision boundary plot + per-neuron activation stats instead of just increasing epochs blindly
+Found 2/4 neurons permanently dead (dying ReLU). Fixed with wider network (16 neurons) as primary fix; tested Leaky ReLU on the original 4-neuron network as a controlled comparison, confirming capacity was the larger constraint
+
+### 🔜 Next session
+
+- Day 15: Convolution as a learned operation — direct callback to Day 11's hand-coded Sobel kernels, but with learned weights instead of fixed ones
+- Compare manual 2D convolution implementation to torch.nn.Conv2d
+
+---
+
 ## Day 13 — July 17, 2026
 
 **Phase:** 2 — AI & Perception 
