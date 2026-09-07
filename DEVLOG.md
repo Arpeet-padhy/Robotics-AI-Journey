@@ -3,6 +3,43 @@
 A daily log of what I built, learned, and struggled with.
 Newest entries at the top.
 
+
+---
+
+## Day 15 — September 8, 2026
+
+**Phase:** 2 — AI & Perception (Deep Learning mini-arc, Day 2 of 5)
+**Time spent:** ~2 hrs
+
+### ✅ What I did
+
+- Watched CS231n Lecture 5 (Convolutional Neural Networks)
+- Built `day15 convolution.ipynb`
+- Implemented manual 2D convolution from scratch (nested-loop sliding window + dot product), using Day 11's exact Sobel-X kernel
+- Verified manual implementation against torch.nn.Conv2d with forced-identical weights — outputs matched exactly (max diff = 0.00000000)
+- Trained a randomly-initialized learnable conv kernel (no Sobel hint given) to reproduce Sobel-X's output via Adam + MSE loss
+- Learned kernel converged to the same directional structure as Sobel-X (negative-left, near-zero-middle, positive-right column pattern), starting from pure random noise
+
+### 🧠 What I learned
+
+- A CNN's conv layer is the identical sliding-window dot-product operation as a hand-designed filter like Sobel — the only difference is whether the weights are hand-derived or learned via backprop
+- Filter must span the full input depth (channels) but is spatially smaller than the input — output volume depth = number of filters (Cout), not input channels
+- Symmetry breaking applies to conv filters too, same as Day 14's dense layer weights — identical initialization would make filters learn identical (redundant) features
+- Output spatial size formula: W' = (W - K + 2P) / S + 1; "same" padding for odd K is P = (K-1)/2
+- Stacking conv layers without activation functions between them mathematically collapses into a single linear layer — same insight as Day 14's "no nonlinearity = no expressive power," now applied to convolution specifically
+- Max pooling is nonlinear (uses max); average pooling is linear and needs a following activation
+- Translation equivariance: shifting the input then convolving = convolving then shifting the output — the mathematical basis for why CNNs recognize objects regardless of position in frame
+- A learned kernel doesn't necessarily converge to identical weights as a hand-designed one solving the same task — different weight combinations can represent functionally equivalent filters (same output behavior, different exact numbers)
+
+### 🚧 Blockers & how I fixed them
+
+- None — clean session, both verification steps (manual vs PyTorch, learned vs Sobel) passed as expected
+
+### 🔜 Next session
+
+- Day 16: CNN architecture — stack multiple conv+pool layers, brief tour of LeNet/AlexNet/ResNet, build a real classifier architecture in PyTorch
+- Optional revisit: try out_channels > 1 to see multiple filters learned simultaneously (real conv layer behavior)
+
 ---
 
 ## Day 14 — August 28, 2026
